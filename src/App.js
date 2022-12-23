@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      Bluff Talk
+      <h1 className="text-3xl font-bold underline">
+      BluffTalk
+    </h1>
     </div>
   );
 }
