@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AllChats() {
+function ChatList() {
   return (
-    <div>AllChats</div>
+    <div>ChatList</div>
   )
 }
 
-export default AllChats
+export default ChatList
