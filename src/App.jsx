@@ -7,12 +7,12 @@ import ChatList from "./pages/ChatList";
 function App() {
   return (
     <div className="bg-brown-light spectrum-Typography h-full w-full">
-      <Provider className="h-full" theme={defaultTheme}>
+      <Provider theme={defaultTheme}>
         <h1 className="spectrum-Heading spectrum-Heading--sizeXXXL text-brown tracking-widest">
           BluffTalk
         </h1>
-        {/* <Login /> */}
-        <ChatList />
+        <Register />
+        {/* <ChatList /> */}
       </Provider>
     </div>
   );

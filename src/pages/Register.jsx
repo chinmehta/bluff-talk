@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { TextField, Form, Button } from "@adobe/react-spectrum";
+import { registerUser } from "../actions/registerUser";
 
 function Register() {
   let [email, setEmail] = useState("");
@@ -16,8 +17,9 @@ function Register() {
       username: event.target.elements.username.value,
       email: event.target.elements.email.value,
       password: event.target.elements.password.value,
+      profilePhoto: event.target.elements["profile-photo"].files[0],
     };
-    console.log(userData);
+    registerUser(userData);
   };
 
   return (
@@ -48,6 +50,10 @@ function Register() {
           inputMode="text"
           name="password"
         />
+        <input className="hidden" type="file" name="profile-photo" id="profilePhoto" />
+        <label htmlFor="profilePhoto">
+            Upload Phtoto
+        </label>
         <Button variant="accent" style="fill" type="submit">
           Register
         </Button>
