@@ -1,6 +1,7 @@
 import { RegisterUserWithEmail } from "../services/auth.service";
 import { getImageDownloadURL, uploadImage } from "../services/storage.service";
 import { addUserToAllUsers, addUserToUserChats, updateUserProfileData } from "../services/user.service";
+import { redirect } from "react-router-dom";
 
 export const registerUser = async (formData) => {
   try {
@@ -17,6 +18,7 @@ export const registerUser = async (formData) => {
     await addUserToAllUsers(registeredUserDetails.user);
     await addUserToUserChats(registeredUserDetails.user);
     console.log("inside register",registeredUserDetails.user);
+    // return redirect("/dashboard");
   } catch (error) {
     console.log(error);
   }

@@ -1,13 +1,14 @@
 import { useState, useMemo } from "react";
 import { TextField, Form, Button } from "@adobe/react-spectrum";
 import { registerUser } from "../actions/registerUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
-  let [email, setEmail] = useState("");
-  let [name, setName] = useState("");
-  let [password, setPassword] = useState("");
-  let isValidEmail = useMemo(
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const isValidEmail = useMemo(
     () => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
     [email]
   );
@@ -20,13 +21,15 @@ function Register() {
       password: event.target.elements.password.value,
       profilePhoto: event.target.elements["profile-photo"].files[0],
     };
-    registerUser(userData);
-    console.log('from reg component')
+    const userRegistered = registerUser(userData);
+    userRegistered.then(() => {
+      navigate("/dashboard");
+    });
   };
 
   return (
     <>
-    <h1>Register</h1>
+      <h1>Register</h1>
       <Form isRequired method="post" onSubmit={onSubmit}>
         <TextField
           value={name}
@@ -52,10 +55,13 @@ function Register() {
           inputMode="text"
           name="password"
         />
-        <input className="hidden" type="file" name="profile-photo" id="profilePhoto" />
-        <label htmlFor="profilePhoto">
-            Upload Phtoto
-        </label>
+        <input
+          className="hidden"
+          type="file"
+          name="profile-photo"
+          id="profilePhoto"
+        />
+        <label htmlFor="profilePhoto">Upload Phtoto</label>
         <Button variant="accent" style="fill" type="submit">
           Register
         </Button>

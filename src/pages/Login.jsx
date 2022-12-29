@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
 import { TextField, Form, Button } from "@adobe/react-spectrum";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../actions/loginUser";
 
 function Login() {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  const navigate = useNavigate();
   let isValidEmail = useMemo(
     () => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
     [email]
@@ -16,7 +18,10 @@ function Login() {
       email: event.target.elements.email.value,
       password: event.target.elements.password.value,
     };
-    console.log(userData);
+    const loggedinUser = loginUser(userData);
+    loggedinUser.then(() => {
+      navigate("/dashboard");
+    });
   };
 
   return (
