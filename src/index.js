@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, BrowserRouter } from "react-router-dom";
 import UsersDashboard from "./pages/UsersDashboard";
 import ChatList from "./pages/ChatList";
 import UserChat from "./pages/UserChat";
@@ -32,10 +32,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
     <React.StrictMode>
-      {/* <BrowserRouter> */}
-      {/* <App /> */}
-      <RouterProvider router={router} />
-      {/* </BrowserRouter> */}
+      <BrowserRouter>
+      <App />
+      {/* <RouterProvider router={router} /> */}
+      </BrowserRouter>
     </React.StrictMode>
   </AuthContextProvider>
 );

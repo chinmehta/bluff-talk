@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { TextField, Form, Button } from "@adobe/react-spectrum";
 import { registerUser } from "../actions/registerUser";
+import { Link } from "react-router-dom";
 
 function Register() {
   let [email, setEmail] = useState("");
@@ -57,6 +58,7 @@ function Register() {
         <Button variant="accent" style="fill" type="submit">
           Register
         </Button>
+        <Link to="/login">Login</Link>
       </Form>
     </>
   );

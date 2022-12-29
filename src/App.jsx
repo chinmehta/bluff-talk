@@ -11,71 +11,40 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { currentUser } = useContext(AuthContext);
 
-  const { currentUser} = useContext(AuthContext);
-
-  const ProtectedRoute = ({children}) => {
-    if(!currentUser) return <Navigate to="/login"/>
-  }
-  
-
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) return <Navigate to="/register" />;
+    return children;
+  };
 
   return (
     <div className="bg-brown-light spectrum-Typography h-full w-full">
       <Provider theme={defaultTheme}>
-        <h1 className="spectrum-Heading spectrum-Heading--sizeXXXL text-brown tracking-widest">
-          BluffTalk
-        </h1>
-        <Media query="(max-width: 844px)">
-          {(matches) =>
-            matches ? (
-              <Routes>
-                <Route
-                  exact
-                  path="/chats"
-                  render={(props) => (
-                    <ChatList></ChatList>
-
-                    // <UsersList users={this.state.users} {...props} />
-                  )}
-                />
-                <Route
-                  path="/chat/:id"
-                  render={(props) => (
-                    <UserChat></UserChat>
-                    // <UsersDetails
-                    //   user={
-                    //     this.state.users.filter(
-                    //       (user) =>
-                    //         user.id === parseInt(props.match.params.id, 10)
-                    //     )[0]
-                    //   }
-                    //   {...props}
-                    // />
-                  )}
-                />
-                {/* <Navigate from="/" to="/chats" />
-                <Navigate from="/dashboard" to="/chats" /> */}
-              </Routes>
-            ) : (
-              <Routes>
-                <Route
-                  path="/dashboard"
-                  render={(props) => (
-                    <UsersDashboard />
-                    // <UsersDashboard users={this.state.users} {...props} />
-                    // <ChatList />
-                  )}
-                />
-                {/* <Navigate from="/" to="/dashboard" /> */}
-                {/* <Navigate from="/chats" to="/dashboard" /> */}
-              </Routes>
-            )
-          }
-        </Media>
-
-        <Register />
-        {/* <ChatList /> */}
+        <h1 className="text-brown tracking-widest">BluffTalk</h1>
+        
+          <Media query="(max-width: 844px)">
+            {(matches) =>
+              matches ? (
+                <Routes>
+                  <Route exact path="/chats" element={<ProtectedRoute><ChatList /></ProtectedRoute>} />
+                  <Route path="/chats/:user-id" element={<ProtectedRoute><UserChat /></ProtectedRoute>} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/" element={<Navigate to="/chats" />} />
+                  <Route path="/dashboard" element={<Navigate to="/chats" />} />
+                </Routes>
+              ) : (
+                <Routes>
+                  <Route path="/dashboard" element={<ProtectedRoute><UsersDashboard /></ProtectedRoute>} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/chats" element={<Navigate to="/dashboard" />} />
+                  <Route path="/" element={<Navigate to="/dashboard" />} />
+                </Routes>
+              )
+            }
+          </Media>
       </Provider>
     </div>
   );

@@ -16,8 +16,8 @@ export const registerUser = async (formData) => {
     await updateUserProfileData(downloadURL, formData.username);
     await addUserToAllUsers(registeredUserDetails.user);
     await addUserToUserChats(registeredUserDetails.user);
+    console.log("inside register",registeredUserDetails.user);
   } catch (error) {
     console.log(error);
   }
-  console.log("inside register");
 };

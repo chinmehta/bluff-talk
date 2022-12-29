@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { TextField, Form, Button } from "@adobe/react-spectrum";
+import { Link } from "react-router-dom";
 
 function Login() {
   let [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ function Login() {
         <Button variant="accent" style="fill" type="submit">
           Login
         </Button>
+        <Link to="/register">register</Link>
       </Form>
     </>
   );

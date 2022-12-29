@@ -1,4 +1,7 @@
 import React from "react";
+import { TextField, Form, Button } from "@adobe/react-spectrum";
+import { logoutUser } from "../actions/logoutUser";
+
 
 function ChatList({ usersList }) {
   const dummyList = [
@@ -11,6 +14,9 @@ function ChatList({ usersList }) {
   ]
   return (
     <>
+      <Button variant="accent" style="fill" onPress={logoutUser}>
+          Logout
+        </Button>
       {dummyList.map((user, index) => (
         <div className="flex" key={index}>
           <div className="user-image">
