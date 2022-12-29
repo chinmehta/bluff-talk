@@ -27,20 +27,18 @@ function App() {
             {(matches) =>
               matches ? (
                 <Routes>
-                  <Route exact path="/chats" element={<ProtectedRoute><ChatList /></ProtectedRoute>} />
-                  <Route path="/chats/:user-id" element={<ProtectedRoute><UserChat /></ProtectedRoute>} />
+                  <Route path="/chats" element={<ProtectedRoute><ChatList /></ProtectedRoute>} />
+                  <Route path="/chats/:userId" element={<ProtectedRoute><UserChat /></ProtectedRoute>} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/" element={<Navigate to="/chats" />} />
-                  <Route path="/dashboard" element={<Navigate to="/chats" />} />
                 </Routes>
               ) : (
                 <Routes>
-                  <Route path="/dashboard" element={<ProtectedRoute><UsersDashboard /></ProtectedRoute>} />
+                  <Route path="/chats/*" element={<ProtectedRoute><UsersDashboard /></ProtectedRoute>} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/chats" element={<Navigate to="/dashboard" />} />
-                  <Route path="/" element={<Navigate to="/dashboard" />} />
+                  <Route path="/" element={<Navigate to="/chats" />} />
                 </Routes>
               )
             }
