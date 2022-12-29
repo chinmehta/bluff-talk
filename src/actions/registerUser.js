@@ -1,6 +1,6 @@
 import { RegisterUserWithEmail } from "../services/auth.service";
 import { getImageDownloadURL, uploadImage } from "../services/storage.service";
-import { addUserToAllUsers, updateUserProfileData } from "../services/user.service";
+import { addUserToAllUsers, addUserToUserChats, updateUserProfileData } from "../services/user.service";
 
 export const registerUser = async (formData) => {
   try {
@@ -14,7 +14,8 @@ export const registerUser = async (formData) => {
       registeredUserDetails.user.uid
     );
     await updateUserProfileData(downloadURL, formData.username);
-    await addUserToAllUsers(registeredUserDetails.user)
+    await addUserToAllUsers(registeredUserDetails.user);
+    await addUserToUserChats(registeredUserDetails.user);
   } catch (error) {
     console.log(error);
   }
