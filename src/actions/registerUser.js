@@ -8,11 +8,11 @@ export const registerUser = async (formData) => {
       formData.email,
       formData.password
     );
-    await uploadImage(formData.profilePhoto, registeredUserDetails.user.uid);
+    formData.profilePhoto && await uploadImage(formData.profilePhoto, registeredUserDetails.user.uid);
 
-    const downloadURL = await getImageDownloadURL(
+    const downloadURL = formData.profilePhoto ? await getImageDownloadURL(
       registeredUserDetails.user.uid
-    );
+    ) : null;
     await updateUserProfileData(downloadURL, formData.username);
     await addUserToAllUsers(registeredUserDetails.user);
     await addUserToUserChats(registeredUserDetails.user);

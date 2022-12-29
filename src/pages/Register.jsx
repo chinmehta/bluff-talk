@@ -21,6 +21,7 @@ function Register() {
       profilePhoto: event.target.elements["profile-photo"].files[0],
     };
     registerUser(userData);
+    console.log('from reg component')
   };
 
   return (

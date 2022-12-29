@@ -4,10 +4,10 @@ import { auth } from "./auth.service";
 
 export const DB = getFirestore();
 
-export const updateUserProfileData = async (photoURL, username) => {
+export const updateUserProfileData = async (photoURL, displayName) => {
   return await updateProfile(auth.currentUser, {
-    displayName: username,
-    photoURL: photoURL,
+    displayName,
+    photoURL: photoURL ? photoURL : null,
   });
 };
 
