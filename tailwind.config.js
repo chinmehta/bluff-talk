@@ -8,6 +8,9 @@ module.exports = {
     colors: {
       "brown-light": "#a39c95",
       "brown": "#65605c"
+    },
+    maxWidth: {
+      '80': '80%',
     }
   },
   plugins: [],

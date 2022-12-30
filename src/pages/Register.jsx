@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { TextField, Form, Button } from "@adobe/react-spectrum";
+import { TextField, Form, Button, LabeledValue } from "@adobe/react-spectrum";
 import { registerUser } from "../actions/registerUser";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -62,6 +62,7 @@ function Register() {
           id="profilePhoto"
         />
         <label htmlFor="profilePhoto">Upload Phtoto</label>
+        <LabeledValue label="File name" value="Budget.xls" />
         <Button variant="accent" style="fill" type="submit">
           Register
         </Button>
