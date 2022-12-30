@@ -23,7 +23,7 @@ function Register() {
     };
     const userRegistered = registerUser(userData);
     userRegistered.then(() => {
-      navigate("/dashboard");
+      navigate("/chats");
     });
   };
 

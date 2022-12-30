@@ -20,7 +20,7 @@ function Login() {
     };
     const loggedinUser = loginUser(userData);
     loggedinUser.then(() => {
-      navigate("/dashboard");
+      navigate("/chats");
     });
   };
 
