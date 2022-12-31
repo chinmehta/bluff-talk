@@ -8,7 +8,7 @@ import ChatList from "./pages/ChatList";
 import UserChat from "./pages/UserChat";
 import UsersDashboard from "./pages/UsersDashboard";
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./context/authContext";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

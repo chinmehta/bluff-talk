@@ -3,15 +3,19 @@ import Search from "./Search";
 import ChatItem from "../components/ChatItem";
 import NavBar from "../components/NavBar";
 import { searchUser } from "../services/search.service";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/authContext";
 import { userClicked } from "../actions/searchUser";
 import { doc, onSnapshot } from "firebase/firestore";
 import { DB } from "../services/user.service";
+import { ChatContext } from "../context/chatContext";
+import { useNavigate } from "react-router-dom";
 
 function ChatList() {
   const { currentUser } = useContext(AuthContext);
+  const { setCurrentClient } = useContext(ChatContext);
   const [usersList, setUsersList] = useState([]);
   const [searchState, setSearchState] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (currentUser.uid && !searchState) {
@@ -27,8 +31,11 @@ function ChatList() {
     }
   }, [currentUser.uid, searchState]);
 
-  const onChatSelect = (selectedClient) => {
-    userClicked(selectedClient, currentUser);
+  const onChatSelect = async (selectedClient) => {
+    const chatId = await userClicked(selectedClient, currentUser);
+    selectedClient.chatId = chatId;
+    setCurrentClient(selectedClient);
+    navigate("/chats/" + selectedClient.uid)
     setSearchState(false);
   };
 
@@ -39,11 +46,6 @@ function ChatList() {
       setSearchState(true);
     });
   };
-
-  // const getRecentChats = () => {
-  //   const ss = getAllRecentChats(currentUser.uid);
-  //   console.log(`👻 ~ file: ChatList.jsx:56 ~ getRecentChats ~ ss`, ss);
-  // };
 
   return (
     <>

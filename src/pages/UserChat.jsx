@@ -1,16 +1,19 @@
 import { TextField } from "@adobe/react-spectrum";
-import React from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import ChatHeader from "../components/ChatHeader";
 import Message from "../components/Message";
+import { ChatContext } from "../context/chatContext";
 
 function UserChat() {
   let { userId } = useParams();
+  const { currentClient } = useContext(ChatContext);
+
   return (
     <>
       <div className="chat-container h-full flex flex-col">
         <div className="chat-header">
-          <ChatHeader />
+          <ChatHeader user={currentClient}/>
           {userId}
         </div>
         <div className="chat-container">

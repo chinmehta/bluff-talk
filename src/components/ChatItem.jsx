@@ -19,7 +19,7 @@ function ChatItem({ item, onChatSelect }) {
         </div>
         <div className="w-full p-1.5">
           <div className="username-container flex justify-between ">
-            <div className="username">{item.displayName}</div>
+            <div className="username">{item.email}</div>
             <div className="last-message">{item.time}</div>
           </div>
           <div className="user-last-message">{item.lastMessage}</div>

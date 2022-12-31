@@ -13,6 +13,7 @@ export const userClicked = async (client, currentUser) => {
   await createChatForUser(chatId);
   await updateUserChatList(client, currentUser, chatId);
   await updateUserChatList(currentUser, client, chatId);
+  return chatId;
 };
 
 const getChatId = (clientId, currentUserId) => {
