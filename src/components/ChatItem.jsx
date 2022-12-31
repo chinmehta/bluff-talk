@@ -7,7 +7,7 @@ function ChatItem({ item, onChatSelect }) {
       <div
         className="flex py-1"
         onClick={() => {
-          onChatSelect(item.uid);
+          onChatSelect(item);
         }}
       >
         <div className="flex items-center p-1.5">
