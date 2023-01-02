@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, IconButton, TextField } from "@mui/material";
 import { sendMessage } from "../actions/sendMessage";
+import { AttachFile } from '@mui/icons-material';
 
 function UserInput({ currentUserId, chatId }) {
   const [userInputText, setUserInputText] = useState("");
@@ -13,6 +14,7 @@ function UserInput({ currentUserId, chatId }) {
 
   const send = () => {
     //check for file
+    if (!userInputText && !userInputFile) return null;
     const messageObj = {
       text: userInputText,
       file: userInputFile,
@@ -24,7 +26,9 @@ function UserInput({ currentUserId, chatId }) {
   return (
     <>
       <TextField
-        id="outlined-basic"
+        fullWidth
+        multiline
+        maxRows={6}
         label="Message"
         variant="outlined"
         value={userInputText}
@@ -32,6 +36,16 @@ function UserInput({ currentUserId, chatId }) {
           setUserInputText(e.target.value);
         }}
       />
+      <IconButton color="primary" aria-label="upload picture" component="label">
+        <input
+          hidden
+          type="file"
+          onChange={(e) => {
+            setUserInputFile(e.target.files[0]);
+          }}
+        />
+        <AttachFile />
+      </IconButton>
       <Button variant="contained" size="small" onClick={send}>
         Send
       </Button>

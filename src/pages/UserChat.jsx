@@ -39,7 +39,7 @@ function UserChat() {
               <Message messageObject={message} key={message.messageId} />
             ))}
         </div>
-        <div className="user-input-container mt-auto">
+        <div className="user-input-container flex mt-auto">
           <UserInput
             currentUserId={currentUser.uid}
             chatId={currentClient.chatId}

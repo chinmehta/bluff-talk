@@ -58,6 +58,7 @@ function Register() {
         <input
           className="hidden"
           type="file"
+          accept="image/*"
           name="profile-photo"
           id="profilePhoto"
         />
