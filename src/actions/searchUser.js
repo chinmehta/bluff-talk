@@ -1,7 +1,7 @@
 import {
   checkForExistingChat,
   createChatForUser,
-  updateUserChatList,
+  addPrivateChatToUserListOfChat,
 } from "../services/chat.service";
 
 export const userClicked = async (client, currentUser) => {
@@ -11,8 +11,8 @@ export const userClicked = async (client, currentUser) => {
     return chatId;
   }
   await createChatForUser(chatId);
-  await updateUserChatList(client, currentUser, chatId);
-  await updateUserChatList(currentUser, client, chatId);
+  await addPrivateChatToUserListOfChat(client, currentUser, chatId);
+  await addPrivateChatToUserListOfChat(currentUser, client, chatId);
   return chatId;
 };
 

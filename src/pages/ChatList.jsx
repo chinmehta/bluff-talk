@@ -42,7 +42,7 @@ function ChatList() {
   const getSearchItem = (searchQuery) => {
     const searchResult = searchUser(searchQuery);
     searchResult.then((res) => {
-      setUsersList(res);
+      setUsersList(res.sort((a,b)=> a.lastUpdateDate - b.lastUpdateDate));
       setSearchState(true);
     });
   };

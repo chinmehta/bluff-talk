@@ -1,17 +1,32 @@
-import React from "react";
+import { Button } from "@mui/material";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ChatContext } from "../context/chatContext";
+import Media from "react-media";
 
-function ChatHeader({ user }) {
+function ChatHeader() {
+  const { currentClient } = useContext(ChatContext);
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <div className="flex items-center">
+        <Media query="(max-width: 844px)">
+          {(matches) =>
+            matches ? <Button onClick={goBack}>Back</Button> : null
+          }
+        </Media>
         <img
           className="rounded-full w-12"
-          // src="https://firebasestorage.googleapis.com/v0/b/bluff-talk.appspot.com/o/nJLgpjg3fdNlZI5pI4ymyb3MtlJ2?alt=media&token=ab8c36aa-e324-4bbb-a7ad-a30811337741"
-          src={user.photoURL}
-          alt="user profile photo"
+          src={currentClient.photoURL}
+          alt="client profile photo"
         />
 
-        <div className="username">{user.email}</div>
+        <div className="username">{currentClient.email}</div>
       </div>
     </>
   );

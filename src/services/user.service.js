@@ -20,6 +20,6 @@ export const addUserToAllUsers = async (user) => {
   });
 };
 
-export const addUserToUserChats = async (user) => {
+export const createUserChatList = async (user) => {
   await setDoc(doc(DB, "userChats", user.uid), {});
 };
