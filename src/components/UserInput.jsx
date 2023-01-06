@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, IconButton, TextField } from "@mui/material";
 import { sendMessage } from "../actions/sendMessage";
 import { AttachFile } from '@mui/icons-material';
+import { ChatContext } from "../context/chatContext";
 
 function UserInput({ currentUserId, chatId }) {
   const [userInputText, setUserInputText] = useState("");
   const [userInputFile, setUserInputFile] = useState(null);
+  const { currentClient } = useContext(ChatContext);
 
   const userObj = {
-    uid: currentUserId,
+    currentUserId: currentUserId,
     chatId: chatId,
+    currentClientId : currentClient.uid
   };
 
   const send = () => {

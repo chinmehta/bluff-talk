@@ -18,7 +18,11 @@ export const createChatForUser = async (chatId) => {
   return await setDoc(doc(DB, "allChats", chatId), { messages: [] });
 };
 
-export const addPrivateChatToUserListOfChat = async (client, currentUser, chatId) => {
+export const addPrivateChatToUserListOfChat = async (
+  client,
+  currentUser,
+  chatId
+) => {
   const userChatsRef = doc(DB, "userChats", currentUser.uid);
   await updateDoc(userChatsRef, {
     [chatId]: {
@@ -32,18 +36,18 @@ export const addPrivateChatToUserListOfChat = async (client, currentUser, chatId
   });
 };
 
-export const updateUserChatList = async (client, currentUser, chatId) => {
-  const userChatsRef = doc(DB, "userChats", currentUser.uid);
-  // await updateDoc(userChatsRef, {
-  //   [chatId]: {
-  //     chatId,
-  //     lastUpdateDate: serverTimestamp(),
-  //     displayName: client.displayName,
-  //     email: client.email,
-  //     photoURL: client.photoURL,
-  //     uid: client.uid,
-  //   },
-  // });
+export const updateUserLastMessage = async (
+  messageObject,
+  currentUserUID,
+  chatId
+) => {
+  const userChatsRef = doc(DB, "userChats", currentUserUID);
+  await updateDoc(userChatsRef, {
+    [chatId + ".lastMessage"]: messageObject.text
+      ? messageObject.text
+      : "File Attached.",
+    [chatId + ".lastUpdateDate"]: serverTimestamp(),
+  });
 };
 
 export const addMessageToChat = async (messageObj, currentUser) => {
@@ -52,7 +56,7 @@ export const addMessageToChat = async (messageObj, currentUser) => {
     messages: arrayUnion({
       messageId: uuid(),
       date: Timestamp.now(),
-      senderId: currentUser.uid,
+      senderId: currentUser.currentUserId,
       text: messageObj.text,
       fileURL: messageObj.fileURL,
     }),

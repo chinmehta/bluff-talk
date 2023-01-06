@@ -6,7 +6,7 @@ import UserChat from "./UserChat";
 function UsersDashboard() {
   return (
     <>
-      <div className="dhasboard-container flex">
+      <div className="dhasboard-container flex h-full">
         <div className="chat-list-container">
           <ChatList></ChatList>
         </div>

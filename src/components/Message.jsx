@@ -13,7 +13,7 @@ function Message({ messageObject }) {
         } `}
       >
         {messageObject.fileURL && (
-          <img className="w-40 mh-auto mw-auto" src={messageObject.fileURL} alt="" srcset="" />
+          <img className="w-40 mh-auto mw-auto" src={messageObject.fileURL} alt="attached image"/>
         )}
         {messageObject.text && (
           <div className="message-text">{messageObject.text}</div>
